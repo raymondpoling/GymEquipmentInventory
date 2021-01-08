@@ -6,21 +6,15 @@
     android:layout_height="match_parent"
     tools:context=".view.AddActivity"
     style="@style/CardStyle">
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/label_edit_guideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintGuide_percent=".40"
-        android:orientation="vertical" />
+    
 
     <TextView
         style="@style/BasicText"
         android:id="@+id/name_const_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Name"
-        app:layout_constraintEnd_toStartOf="@id/label_edit_guideline"
+        android:text="@string/name"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
 
     <EditText
@@ -38,8 +32,8 @@
         android:id="@+id/quantity_const_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Quantity"
-        app:layout_constraintEnd_toStartOf="@id/label_edit_guideline"
+        android:text="@string/quantity"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/name_edittext"/>
 
     <EditText
@@ -57,8 +51,8 @@
         android:id="@+id/price_const_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Price"
-        app:layout_constraintEnd_toStartOf="@id/label_edit_guideline"
+        android:text="@string/price"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/quantity_edittext"/>
 
     <EditText
@@ -76,8 +70,8 @@
         android:id="@+id/url_const_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Image URL"
-        app:layout_constraintEnd_toStartOf="@id/label_edit_guideline"
+        android:text="@string/image_url"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/price_edittext"/>
 
     <EditText
@@ -95,8 +89,8 @@
         android:id="@+id/description_const_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Description"
-        app:layout_constraintEnd_toStartOf="@id/label_edit_guideline"
+        android:text="@string/description"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/url_edittext"/>
 
     <EditText

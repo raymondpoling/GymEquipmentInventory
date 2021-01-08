@@ -5,4 +5,9 @@
     <string name="add_equipment">Add Equipment</string>
     <string name="equipment_image_text">An image of the equipment</string>
     <string name="save_equipment">Save Equipment</string>
+    <string name="name">Name</string>
+    <string name="quantity">Quantity</string>
+    <string name="price">Price</string>
+    <string name="image_url">Image URL</string>
+    <string name="description">Description</string>
 </resources>

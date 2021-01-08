@@ -2,7 +2,9 @@ package org.mousehole.americanairline.gymequipmentinventory.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -24,6 +26,8 @@ public class AddActivity extends AppCompatActivity {
 
         gymDatabaseHelper = new GymDatabaseHelper(this);
 
+        Log.e("onCreate", "Creating");
+
         // bindings
         saveButton = findViewById(R.id.save_button);
         nameEditText = findViewById(R.id.name_edittext);
@@ -35,13 +39,17 @@ public class AddActivity extends AppCompatActivity {
         saveButton.setOnClickListener(v -> {
             String name = nameEditText.getText().toString();
             String url = urlEditText.getText().toString();
-            int quantity = Integer.parseInt(nameEditText.getText().toString());
+            int quantity = Integer.parseInt(quantityEditText.getText().toString());
             Double price = Double.parseDouble(priceEditText.getText().toString());
             String description = descriptionEditText.getText().toString();
 
-            GymEquipment gymEquipment = new GymEquipment(name,quantity,price,url,description);
+            GymEquipment gymEquipment = new GymEquipment(name,quantity,price,description,url);
 
-            gymDatabaseHelper.saveGymEquipment(gymEquipment);
+            Intent result = new Intent();
+            result.putExtra(GymListActivity.ADD_EQUIPMENT, gymEquipment);
+
+            setResult(RESULT_OK, result);
+
             finish();
         });
     }

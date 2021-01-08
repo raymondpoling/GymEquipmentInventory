@@ -1,5 +1,7 @@
 package org.mousehole.americanairline.gymequipmentinventory.model.database;
 
+import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +14,7 @@ import com.bumptech.glide.Glide;
 
 import org.mousehole.americanairline.gymequipmentinventory.R;
 import org.mousehole.americanairline.gymequipmentinventory.model.GymEquipment;
+import org.mousehole.americanairline.gymequipmentinventory.view.DetailActivity;
 
 import java.util.List;
 
@@ -19,17 +22,12 @@ public class GymAdapter extends BaseAdapter {
 
 
     private final List<GymEquipment> gymEquipmentList;
-    private final GymEquipmentDelegate gymEquipmentDelegate;
+    private final Context mainContext;
 
-    public interface GymEquipmentDelegate {
-        void selectEquipment(GymEquipment gymEquipment);
-    }
-
-    public GymAdapter(List<GymEquipment> gymEquipmentList, GymEquipmentDelegate gymEquipmentDelegate) {
+    public GymAdapter(List<GymEquipment> gymEquipmentList, Context mainContext) {
         Log.e("TAG_X", "gym adapter constructor");
         this.gymEquipmentList = gymEquipmentList;
-        this.gymEquipmentDelegate = gymEquipmentDelegate;
-
+        this.mainContext = mainContext;
     }
 
     @Override
@@ -63,24 +61,22 @@ public class GymAdapter extends BaseAdapter {
         TextView name = mainView.findViewById(R.id.name_textview);
         TextView quantityPerUnit = mainView.findViewById(R.id.quantity_and_per_unit_price_textview);
         TextView perUnitTotalPrice = mainView.findViewById(R.id.per_unit_total_price_textview);
-        TextView description = mainView.findViewById(R.id.description);
 
         Glide.with(mainView.getContext()).load(gymEquipment.getUrl()).into(equipmentImage);
         name.setText(gymEquipment.getName());
         quantityPerUnit.setText(mainView.getResources().getString(R.string.x_at_y,gymEquipment.getQuantity(), gymEquipment.getPrice()));
         perUnitTotalPrice.setText(mainView.getResources().getString(R.string.totalCost, gymEquipment.getPrice() * gymEquipment.getQuantity()));
-        description.setText(gymEquipment.getDescription());
 
         mainView.setOnClickListener(view1 -> {
-            gymEquipmentDelegate.selectEquipment(gymEquipment);
-            if(View.GONE == description.getVisibility()) {
-                description.setVisibility(View.VISIBLE);
-            } else {
-                description.setVisibility(View.GONE);
+            Intent details = new Intent(mainView.getContext(), DetailActivity.class);
+            details.putExtra(DetailActivity.GET_DETAILS, details);
+            Log.e("click listener adapter", "Is this clicking?");
+            try {
+                mainContext.startActivity(details);
+            } catch (Exception e) {
+                Log.e("INTENT ERROR", e.getMessage(), e);
             }
-            mainView.refreshDrawableState();
         });
-
 
         return mainView;
     }

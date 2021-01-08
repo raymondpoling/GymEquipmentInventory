@@ -1,6 +1,9 @@
 package org.mousehole.americanairline.gymequipmentinventory.model;
 
-public class GymEquipment {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class GymEquipment implements Parcelable {
 
     private String name;
     private int quantity;
@@ -25,6 +28,27 @@ public class GymEquipment {
         this.description = description;
         this.url = url;
     }
+
+    protected GymEquipment(Parcel in) {
+        name = in.readString();
+        quantity = in.readInt();
+        price = in.readDouble();
+        description = in.readString();
+        id = in.readInt();
+        url = in.readString();
+    }
+
+    public static final Creator<GymEquipment> CREATOR = new Creator<GymEquipment>() {
+        @Override
+        public GymEquipment createFromParcel(Parcel in) {
+            return new GymEquipment(in);
+        }
+
+        @Override
+        public GymEquipment[] newArray(int size) {
+            return new GymEquipment[size];
+        }
+    };
 
     public String getName() {
         return name;
@@ -68,5 +92,20 @@ public class GymEquipment {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(name);
+        parcel.writeInt(quantity);
+        parcel.writeDouble(price);
+        parcel.writeString(description);
+        parcel.writeInt(id);
+        parcel.writeString(url);
     }
 }

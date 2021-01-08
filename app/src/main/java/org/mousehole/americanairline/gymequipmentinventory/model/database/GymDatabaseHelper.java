@@ -119,6 +119,7 @@ public class GymDatabaseHelper extends SQLiteOpenHelper {
         content.put(COLUMN_QUANTITY, gymEquipment.getQuantity());
         content.put(COLUMN_DESCRIPTION, gymEquipment.getDescription());
         content.put(COLUMN_PRICE, gymEquipment.getPrice()+"");
+
         try {
             getWritableDatabase().insert(TABLE_NAME, null, content);
         } catch (Exception e) {

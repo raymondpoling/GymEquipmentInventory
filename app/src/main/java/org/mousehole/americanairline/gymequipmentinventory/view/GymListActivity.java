@@ -6,6 +6,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import org.mousehole.americanairline.gymequipmentinventory.R;
@@ -16,13 +17,16 @@ import org.w3c.dom.Text;
 
 import java.util.List;
 
-public class GymListActivity extends AppCompatActivity implements GymAdapter.GymEquipmentDelegate {
+public class GymListActivity extends AppCompatActivity {
 
+    public static final String ADD_EQUIPMENT = "add_equipment";
     private GymDatabaseHelper gymDatabaseHelper;
     private ListView gymList;
     private GymAdapter gymAdapter;
     private TextView totalTextView;
     private Button addEquipmentButton;
+
+    public static final int REQUEST_CODE = 707;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,27 +35,39 @@ public class GymListActivity extends AppCompatActivity implements GymAdapter.Gym
 
         gymDatabaseHelper = new GymDatabaseHelper(this);
 
-        List<GymEquipment> gymEquipmentList = gymDatabaseHelper.getAllEquipment();
-
-        gymAdapter = new GymAdapter(gymEquipmentList, this);
         gymList = findViewById(R.id.gym_listview);
         totalTextView = findViewById(R.id.total_textview);
 
-        totalTextView.setText(getResources().getString(R.string.totalCost, gymDatabaseHelper.getTotal()));
+        loadData();
 
         addEquipmentButton = findViewById(R.id.add_button);
 
         addEquipmentButton.setOnClickListener(v -> {
             Intent intent = new Intent(this, AddActivity.class);
-            startActivity(intent);
+            startActivityForResult(intent, REQUEST_CODE);
         });
-
-        gymList.setAdapter(gymAdapter);
 
     }
 
+    private void loadData() {
+        List<GymEquipment> gymEquipmentList = gymDatabaseHelper.getAllEquipment();
+        gymAdapter = new GymAdapter(gymEquipmentList, this);
+        gymList.setAdapter(gymAdapter);
+        totalTextView.setText(getResources().getString(R.string.totalCost, gymDatabaseHelper.getTotal()));
+    }
+
     @Override
-    public void selectEquipment(GymEquipment gymEquipment) {
-        // nop
+    protected void onResume() {
+        super.onResume();
+        loadData();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(data != null) {
+            GymEquipment gymEquipment = data.getParcelableExtra(ADD_EQUIPMENT);
+            gymDatabaseHelper.saveGymEquipment(gymEquipment);
+        }
     }
 }
