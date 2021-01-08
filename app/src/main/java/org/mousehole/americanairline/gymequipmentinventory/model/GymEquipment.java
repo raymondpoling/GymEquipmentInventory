@@ -7,20 +7,23 @@ public class GymEquipment {
     private double price;
     private String description;
     private int id;
+    private String url;
 
-    public GymEquipment(String name, int quantity, double price, String description, int id) {
+    public GymEquipment(String name, int quantity, double price, String description, String url, int id) {
         this.name = name;
         this.quantity = quantity;
         this.price = price;
         this.description = description;
         this.id = id;
+        this.url = url;
     }
 
-    public GymEquipment(String name, int quantity, double price, String description) {
+    public GymEquipment(String name, int quantity, double price, String description, String url) {
         this.name = name;
         this.quantity = quantity;
         this.price = price;
         this.description = description;
+        this.url = url;
     }
 
     public String getName() {
@@ -59,4 +62,11 @@ public class GymEquipment {
         return id;
     }
 
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
 }

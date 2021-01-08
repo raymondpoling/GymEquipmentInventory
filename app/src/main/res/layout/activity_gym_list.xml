@@ -4,28 +4,32 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#80AFFF"
     tools:context=".view.GymListActivity">
 
     <ListView
-        android:id="@+id/main_listview"
+        android:id="@+id/gym_listview"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/add_button">
+        app:layout_constraintBottom_toTopOf="@id/total_textview"
+        tools:listitem="@layout/gym_line_item_layout"/>
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-    </ListView>
-
-    <Button
-        android:id="@+id/add_button"
-        android:layout_width="0dp"
+    <TextView
+        style="@style/TotalText"
+        android:id="@+id/total_textview"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Button"
-        android:layout_margin="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/add_button"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        style="@style/BottomButton"
+        android:id="@+id/add_button"
+        android:text="@string/add_equipment"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

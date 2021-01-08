@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import androidx.annotation.Nullable;
 
@@ -23,6 +24,7 @@ public class GymDatabaseHelper extends SQLiteOpenHelper {
     public static final String COLUMN_QUANTITY = "quantity";
     public static final String COLUMN_PRICE = "price";
     public static final String COLUMN_DESCRIPTION = "description";
+    public static final String COLUMN_URL = "url";
 
     public static int DATABASE_VERSION = 1;
 
@@ -34,15 +36,18 @@ public class GymDatabaseHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         String createTable = String.format(
                 "CREATE TABLE %s ( " +
-                        "%s INT PRIMARY KEY AUTOINCREMENT, " +
+                        "%s INTEGER PRIMARY KEY AUTOINCREMENT, " +
                         "%s TEXT, " +
-                        "%s INT, " +
+                        "%s INTEGER, " +
+                        "%s TEXT, " +
                         "%s TEXT, " +
                         "%s TEXT)",
+                TABLE_NAME,
                 COLUMN_ID,
                 COLUMN_NAME,
                 COLUMN_QUANTITY,
                 COLUMN_PRICE,
+                COLUMN_URL,
                 COLUMN_DESCRIPTION);
         sqLiteDatabase.execSQL(createTable);
     }
@@ -65,13 +70,15 @@ public class GymDatabaseHelper extends SQLiteOpenHelper {
             int id = cursor.getInt(cursor.getColumnIndex(COLUMN_ID));
             int quantity = cursor.getInt(cursor.getColumnIndex(COLUMN_QUANTITY));
             double price = Double.parseDouble(cursor.getString(cursor.getColumnIndex(COLUMN_PRICE)));
+            String url = cursor.getString(cursor.getColumnIndex(COLUMN_URL));
             String description = cursor.getString(cursor.getColumnIndex(COLUMN_DESCRIPTION));
             String name = cursor.getString(cursor.getColumnIndex(COLUMN_NAME));
 
-            GymEquipment gymEquipment = new GymEquipment(name, quantity, price,description, id);
+            GymEquipment gymEquipment = new GymEquipment(name, quantity, price,description, url, id);
 
             gymEquipments.add(gymEquipment);
         }
+        cursor.close();
         return gymEquipments;
     }
 
@@ -81,11 +88,41 @@ public class GymDatabaseHelper extends SQLiteOpenHelper {
         content.put(COLUMN_QUANTITY, gymEquipment.getQuantity());
         content.put(COLUMN_PRICE, Double.toString(gymEquipment.getPrice()));
         content.put(COLUMN_DESCRIPTION, gymEquipment.getDescription());
+        content.put(COLUMN_URL, gymEquipment.getUrl());
 
         getWritableDatabase().insert(TABLE_NAME,null, content);
     }
 
     void deleteGymEquipment(GymEquipment gymEquipment) {
         getWritableDatabase().delete(TABLE_NAME, "id = ?", new String[]{gymEquipment.getId()+""});
+    }
+
+    public double getTotal() {
+        String COLUMN_SUM = "SUM";
+        String query = String.format("SELECT SUM(%s * %s) AS %s FROM %s",
+                COLUMN_PRICE,
+                COLUMN_QUANTITY,
+                COLUMN_SUM,
+                TABLE_NAME);
+        Log.e("TAG_TOTAL_QUERY", query);
+        Cursor cursor = getReadableDatabase().rawQuery(query,null);
+        cursor.moveToFirst();
+        double count = cursor.getDouble(cursor.getColumnIndex("SUM"));
+        cursor.close();
+        return count;
+    }
+
+    public void saveGymEquipment(GymEquipment gymEquipment) {
+        ContentValues content = new ContentValues();
+        content.put(COLUMN_NAME, gymEquipment.getName());
+        content.put(COLUMN_URL, gymEquipment.getUrl());
+        content.put(COLUMN_QUANTITY, gymEquipment.getQuantity());
+        content.put(COLUMN_DESCRIPTION, gymEquipment.getDescription());
+        content.put(COLUMN_PRICE, gymEquipment.getPrice()+"");
+        try {
+            getWritableDatabase().insert(TABLE_NAME, null, content);
+        } catch (Exception e) {
+            Log.e("TAG_E", e.getMessage());
+        }
     }
 }

@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Gym Equipment Inventory</string>
+    <string name="x_at_y">%d@$%.2f</string>
+    <string name="totalCost">$%.2f</string>
+    <string name="add_equipment">Add Equipment</string>
+    <string name="equipment_image_text">An image of the equipment</string>
+    <string name="save_equipment">Save Equipment</string>
 </resources>

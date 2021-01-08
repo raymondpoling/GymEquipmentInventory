@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.AddActivity"
+    style="@style/CardStyle">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/label_edit_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintGuide_percent=".40"
+        android:orientation="vertical" />
+
+    <TextView
+        style="@style/BasicText"
+        android:id="@+id/name_const_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Name"
+        app:layout_constraintEnd_toStartOf="@id/label_edit_guideline"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <EditText
+        style="@style/EditText"
+        android:id="@+id/name_edittext"
+        android:inputType="text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/name_const_textview"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <TextView
+        style="@style/BasicText"
+        android:id="@+id/quantity_const_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Quantity"
+        app:layout_constraintEnd_toStartOf="@id/label_edit_guideline"
+        app:layout_constraintTop_toBottomOf="@id/name_edittext"/>
+
+    <EditText
+        style="@style/EditText"
+        android:id="@+id/quantity_edittext"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/quantity_const_textview"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <TextView
+        style="@style/BasicText"
+        android:id="@+id/price_const_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Price"
+        app:layout_constraintEnd_toStartOf="@id/label_edit_guideline"
+        app:layout_constraintTop_toBottomOf="@id/quantity_edittext"/>
+
+    <EditText
+        style="@style/EditText"
+        android:id="@+id/price_edittext"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:inputType="numberDecimal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/price_const_textview"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <TextView
+        style="@style/BasicText"
+        android:id="@+id/url_const_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Image URL"
+        app:layout_constraintEnd_toStartOf="@id/label_edit_guideline"
+        app:layout_constraintTop_toBottomOf="@id/price_edittext"/>
+
+    <EditText
+        style="@style/EditText"
+        android:id="@+id/url_edittext"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:inputType="textUri"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/url_const_textview"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <TextView
+        style="@style/BasicText"
+        android:id="@+id/description_const_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Description"
+        app:layout_constraintEnd_toStartOf="@id/label_edit_guideline"
+        app:layout_constraintTop_toBottomOf="@id/url_edittext"/>
+
+    <EditText
+        style="@style/EditText"
+        android:id="@+id/description_edittext"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:inputType="text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/description_const_textview"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        style="@style/BottomButton"
+        android:id="@+id/save_button"
+        android:text="@string/save_equipment"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+</androidx.constraintlayout.widget.ConstraintLayout>
