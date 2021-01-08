@@ -2,6 +2,7 @@ package org.mousehole.americanairline.gymequipmentinventory.view;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -17,7 +18,7 @@ import org.w3c.dom.Text;
 
 import java.util.List;
 
-public class GymListActivity extends AppCompatActivity {
+public class GymListActivity extends AppCompatActivity implements GymAdapter.StartDelegate {
 
     public static final String ADD_EQUIPMENT = "add_equipment";
     private GymDatabaseHelper gymDatabaseHelper;
@@ -68,6 +69,17 @@ public class GymListActivity extends AppCompatActivity {
         if(data != null) {
             GymEquipment gymEquipment = data.getParcelableExtra(ADD_EQUIPMENT);
             gymDatabaseHelper.saveGymEquipment(gymEquipment);
+        }
+    }
+
+    public void showDetails(GymEquipment gymEquipment) {
+        Intent details = new Intent(this, DetailActivity.class);
+        details.putExtra(DetailActivity.GET_DETAILS, gymEquipment);
+        Log.e("click listener adapter", "Is this clicking?");
+        try {
+            startActivity(details);
+        } catch (Exception e) {
+            Log.e("INTENT ERROR", e.getMessage(), e);
         }
     }
 }

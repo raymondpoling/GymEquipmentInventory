@@ -22,12 +22,16 @@ public class GymAdapter extends BaseAdapter {
 
 
     private final List<GymEquipment> gymEquipmentList;
-    private final Context mainContext;
+    private final StartDelegate start;
 
-    public GymAdapter(List<GymEquipment> gymEquipmentList, Context mainContext) {
+    public interface StartDelegate {
+        void showDetails(GymEquipment gymEquipment);
+    }
+
+    public GymAdapter(List<GymEquipment> gymEquipmentList, StartDelegate start) {
         Log.e("TAG_X", "gym adapter constructor");
         this.gymEquipmentList = gymEquipmentList;
-        this.mainContext = mainContext;
+        this.start = start;
     }
 
     @Override
@@ -68,14 +72,7 @@ public class GymAdapter extends BaseAdapter {
         perUnitTotalPrice.setText(mainView.getResources().getString(R.string.totalCost, gymEquipment.getPrice() * gymEquipment.getQuantity()));
 
         mainView.setOnClickListener(view1 -> {
-            Intent details = new Intent(mainView.getContext(), DetailActivity.class);
-            details.putExtra(DetailActivity.GET_DETAILS, details);
-            Log.e("click listener adapter", "Is this clicking?");
-            try {
-                mainContext.startActivity(details);
-            } catch (Exception e) {
-                Log.e("INTENT ERROR", e.getMessage(), e);
-            }
+            start.showDetails(gymEquipment);
         });
 
         return mainView;

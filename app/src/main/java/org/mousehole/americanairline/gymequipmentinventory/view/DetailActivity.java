@@ -27,6 +27,7 @@ public class DetailActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_detail);
 
+        Log.e("START CHECK", "Did this start?");
 
         //binding
         equipmentImage = findViewById(R.id.equipment_imageview);

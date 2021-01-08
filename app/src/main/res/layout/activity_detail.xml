@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".view.DetailActivity"
-    android:background="@drawable/card_style"
+    style="@style/CardStyle"
     android:id="@+id/detail_view">
 
     <ImageView
@@ -24,16 +24,17 @@
         android:textAllCaps="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="@id/equipment_imageview"
-        app:layout_constraintEnd_toEndOf="@id/equipment_imageview"
-        app:layout_constraintTop_toBottomOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/equipment_imageview" />
 
     <TextView
         style="@style/BasicText"
         android:id="@+id/quantity_and_per_unit_price_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toEndOf="@id/equipment_imageview"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/name_textview" />
 
     <TextView
@@ -41,14 +42,17 @@
         android:id="@+id/per_unit_total_price_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toEndOf="@id/equipment_imageview"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/quantity_and_per_unit_price_textview" />
 
     <TextView
         style="@style/BasicText"
         android:id="@+id/description"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/per_unit_total_price_textview" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
