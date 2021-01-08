@@ -110,4 +110,7 @@ to store and view gym equipment purchased for the gym.
 <a id="org9660b57"></a>
 
 # 
+![shot one](https://github.com/raymondpoling/GymEquipmentInventory/blob/master/screenshot-1.png)
+![shot two](https://github.com/raymondpoling/GymEquipmentInventory/blob/master/screenshot-2.png)
+![shot three](https://github.com/raymondpoling/GymEquipmentInventory/blob/master/screenshot-3.png)
 
